@@ -1,0 +1,40 @@
+
+> lecolso-website@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.5.24
+   - Local:        http://localhost:3000
+   - Network:      http://100.126.30.71:3000
+
+ ✓ Starting...
+ ✓ Ready in 2.2s
+ ○ Compiling / ...
+ ✓ Compiled / in 1384ms (713 modules)
+ GET / 200 in 1998ms
+ GET / 200 in 269ms
+ ✓ Compiled /favicon.ico in 467ms (459 modules)
+ GET /favicon.ico 200 in 777ms
+ GET / 200 in 551ms
+ GET /favicon.ico 200 in 14ms
+ GET / 200 in 101ms
+ GET / 200 in 102ms
+ GET / 200 in 84ms
+ ○ Compiling /informations ...
+ ✓ Compiled /informations in 911ms (732 modules)
+ GET /informations 200 in 1453ms
+ GET / 200 in 590ms
+ GET /informations 200 in 84ms
+ GET /informations 200 in 74ms
+ ○ Compiling /contact ...
+ ✓ Compiled /contact in 5.1s (1037 modules)
+ GET /contact 200 in 5704ms
+ GET /contact 200 in 85ms
+ GET / 200 in 132ms
+ GET / 200 in 89ms
+ GET /contact 200 in 54ms
+ GET / 200 in 82ms
+ GET / 200 in 622ms
+ GET /contact 200 in 43ms
+ GET /informations 200 in 103ms
+ GET /contact 200 in 55ms
+ GET / 200 in 97ms
