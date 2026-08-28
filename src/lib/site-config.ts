@@ -1,8 +1,13 @@
 // Édition en dur le temps que l'installateur Windows soit publié.
 // Basculer sur "available" et renseigner windowsInstallerUrl quand le lien réel existe.
-export const releaseMode: "available" | "soon" = "soon";
+// Passe par une fonction pour éviter que TS ne resserre le type sur la valeur littérale.
+function getReleaseMode(): "available" | "soon" {
+  return "available";
+}
 
-export const windowsInstallerUrl = "";
+export const releaseMode = getReleaseMode();
+
+export const windowsInstallerUrl = "https://updates.lecolso.com/Lecolso-Setup-1.0.0.exe";
 
 export const contactEmail = "contact@lecolso.com";
 export const contactPhone = "+225 25 22 01 06 64";
