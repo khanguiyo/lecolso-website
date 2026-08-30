@@ -5,7 +5,27 @@ import { CtaLink } from "@/components/site/cta-link";
 import { Divider } from "@/components/site/divider";
 import { SiteNav } from "@/components/site/site-nav";
 import { SiteFooter } from "@/components/site/site-footer";
-import { ctaPrimaryHref, ctaPrimaryLabel, platformNote } from "@/lib/site-config";
+import { ctaPrimaryHref, ctaPrimaryLabel, platformNote, contactEmail } from "@/lib/site-config";
+
+const softwareApplicationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "Lecolso",
+  applicationCategory: "EducationalApplication",
+  operatingSystem: "Windows",
+  description:
+    "Logiciel de gestion scolaire hors ligne : élèves, classes, notes, bulletins, caisse et paie sur un seul poste Windows.",
+  url: "https://lecolso.com",
+  offers: {
+    "@type": "Offer",
+    availability: "https://schema.org/InStock",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "Teiik SARL",
+    email: contactEmail,
+  },
+};
 
 const stats = [
   { value: "12", label: "Modules couvrant toute la scolarité" },
@@ -102,6 +122,10 @@ const faqs = [
 export default function Home() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd) }}
+      />
       <SiteNav />
       <main className="flex-1">
         <Container>

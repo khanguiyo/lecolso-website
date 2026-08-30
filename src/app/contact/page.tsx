@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Une question sur Lecolso, une démonstration à planifier ou un devis pour plusieurs postes : contactez Teiik SARL.",
+  alternates: {
+    canonical: "/contact",
+  },
 };
 
 export default function ContactPage() {

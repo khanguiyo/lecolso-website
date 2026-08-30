@@ -9,13 +9,50 @@ const archivo = Archivo({
   weight: ["400", "800"],
 });
 
+const siteTitle = "Lecolso — la gestion scolaire, hors ligne d'abord";
+const siteDescription =
+  "Lecolso réunit élèves, classes, notes, bulletins, caisse et paie dans un logiciel Windows installé sur votre poste. Les données restent chez vous, et tout fonctionne sans connexion.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://lecolso.com"),
   title: {
-    default: "Lecolso — la gestion scolaire, hors ligne d'abord",
+    default: siteTitle,
     template: "%s — Lecolso",
   },
-  description:
-    "Lecolso réunit élèves, classes, notes, bulletins, caisse et paie dans un logiciel Windows installé sur votre poste. Les données restent chez vous, et tout fonctionne sans connexion.",
+  description: siteDescription,
+  keywords: [
+    "logiciel gestion scolaire",
+    "gestion scolaire hors ligne",
+    "logiciel école Côte d'Ivoire",
+    "bulletins scolaires logiciel",
+    "gestion caisse école",
+    "Lecolso",
+  ],
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    siteName: "Lecolso",
+    title: siteTitle,
+    description: siteDescription,
+    url: "/",
+    images: [
+      {
+        url: "/images/lecolso-dashboard.png",
+        width: 1888,
+        height: 941,
+        alt: "Tableau de bord Lecolso",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/images/lecolso-dashboard.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

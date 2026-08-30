@@ -23,6 +23,9 @@ export const metadata: Metadata = {
   title: "Mentions légales et confidentialité",
   description:
     "Mentions légales de Lecolso, édité par Teiik SARL, et informations sur la protection des données scolaires.",
+  alternates: {
+    canonical: "/informations",
+  },
 };
 
 const legalRows: [string, string][] = [
