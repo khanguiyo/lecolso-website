@@ -42,6 +42,12 @@ export function ContactForm() {
 
   return (
     <form ref={formRef} action={formAction} noValidate>
+      {/* Honeypot anti-bot : masqué pour un humain, hors du flux de tabulation. */}
+      <div aria-hidden="true" className="pointer-events-none absolute left-[-9999px] size-px overflow-hidden">
+        <label htmlFor="societe">Société</label>
+        <input id="societe" name="societe" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+
       <div className="grid grid-cols-1 gap-x-[clamp(20px,3vw,40px)] gap-y-5 sm:grid-cols-2">
         <div className="space-y-1.5">
           <Label htmlFor="etablissement" className="text-[12px] text-[color-mix(in_srgb,#201E1D_70%,transparent)]">

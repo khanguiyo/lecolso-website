@@ -1,5 +1,6 @@
 "use server";
 
+import { headers } from "next/headers";
 import { Resend } from "resend";
 import { contactEmail } from "@/lib/site-config";
 import { contactFormSchema, contactSubjects } from "@/lib/contact-schema";
@@ -12,10 +13,43 @@ export type ContactFormState = {
 
 const resendFromEmail = process.env.RESEND_FROM_EMAIL || "Lecolso <onboarding@resend.dev>";
 
+const successState: ContactFormState = {
+  status: "success",
+  message: "Merci — votre demande a été prise en compte, nous revenons vers vous sous un jour ouvré.",
+};
+
+// Anti-spam minimal : throttle par IP en mémoire du process. Suffisant pour un
+// formulaire de contact à faible volume ; pas conçu pour tenir plusieurs instances.
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+const RATE_LIMIT_MAX_SUBMISSIONS = 5;
+const submissionsByIp = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const timestamps = (submissionsByIp.get(ip) ?? []).filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS,
+  );
+  timestamps.push(now);
+  submissionsByIp.set(ip, timestamps);
+  return timestamps.length > RATE_LIMIT_MAX_SUBMISSIONS;
+}
+
 export async function sendContactMessage(
   _prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
+  // Honeypot : champ invisible pour un humain, quasi toujours rempli par les bots
+  // qui soumettent tous les champs du formulaire. On répond "succès" pour ne pas
+  // les inciter à s'adapter, sans jamais envoyer l'e-mail.
+  if (formData.get("societe")) {
+    return successState;
+  }
+
+  const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+  if (isRateLimited(ip)) {
+    return successState;
+  }
+
   const parsed = contactFormSchema.safeParse({
     etablissement: formData.get("etablissement"),
     nom: formData.get("nom"),
@@ -83,8 +117,5 @@ export async function sendContactMessage(
     };
   }
 
-  return {
-    status: "success",
-    message: "Merci — votre demande a été prise en compte, nous revenons vers vous sous un jour ouvré.",
-  };
+  return successState;
 }
